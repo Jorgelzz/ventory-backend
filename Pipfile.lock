@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "fa08b0293d9a2abeb93fa23ebee3f15d61c9d43c101033074b6e2790eed44f96"
+            "sha256": "169aa79cd21770d4452e8a516a72847dcec25276a08a752903f49a5b45416bc2"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -58,6 +58,15 @@
             "markers": "python_version >= '3.9'",
             "version": "==4.7.0"
         },
+        "django-filter": {
+            "hashes": [
+                "sha256:1ec9eef48fa8da1c0ac9b411744b16c3f4c31176c867886e4c48da369c407153",
+                "sha256:4fa48677cf5857b9b1347fed23e355ea792464e0fe07244d1fdfb8a806215b80"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.9'",
+            "version": "==25.1"
+        },
         "djangorestframework": {
             "hashes": [
                 "sha256:166809528b1aced0a17dc66c24492af18049f2c9420dbd0be29422029cfc3ff7",
@@ -106,6 +115,13 @@
             ],
             "markers": "python_version >= '3.9'",
             "version": "==2025.4.1"
+        },
+        "pipfile": {
+            "hashes": [
+                "sha256:f7d9f15de8b660986557eb3cc5391aa1a16207ac41bc378d03f414762d36c984"
+            ],
+            "index": "pypi",
+            "version": "==0.0.2"
         },
         "psycopg2-binary": {
             "hashes": [
@@ -425,6 +441,14 @@
             ],
             "markers": "python_version >= '3.8'",
             "version": "==0.5.3"
+        },
+        "toml": {
+            "hashes": [
+                "sha256:806143ae5bfb6a3c6e736a764057db0e6a0e05e338b5630894a5f779cabb4f9b",
+                "sha256:b3bda1d108d5dd99f4a20d24d9c348e91c4db7ab1b749200bded2f839ccbe68f"
+            ],
+            "markers": "python_version >= '2.6' and python_version not in '3.0, 3.1, 3.2'",
+            "version": "==0.10.2"
         },
         "tzdata": {
             "hashes": [

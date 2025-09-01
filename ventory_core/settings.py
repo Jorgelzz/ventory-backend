@@ -30,7 +30,6 @@ SECRET_KEY = 'django-insecure-900cc^g#!s_!kyfq8l)ch7fx+9rk)dt^gng*cy9www9)xy68gc
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = []
 
 
@@ -46,7 +45,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'ventory',
     'drf_spectacular',
-    'corsheaders'
+    'corsheaders',
+    'django_filters'
 ]
 
 MIDDLEWARE = [
@@ -82,12 +82,23 @@ WSGI_APPLICATION = 'ventory_core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# DATABASES = {
+#     "default": dj_database_url.config(
+#         default=os.getenv("DATABASE_URL"),
+#         conn_max_age=600,
+#         ssl_require=True,
+#     )
+# }
+
 DATABASES = {
-    "default": dj_database_url.config(
-        default=os.getenv("DATABASE_URL"),
-        conn_max_age=600,
-        ssl_require=True,
-    )
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv("NAME_DB"),
+        "USER": os.getenv("USER_DB"),
+        "PASSWORD": os.getenv("PASS_DB"),
+        "HOST": os.getenv("HOST"),
+        "PORT": os.getenv("PORT"),
+    }
 }
 
 
