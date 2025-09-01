@@ -1,4 +1,3 @@
-from time import localtime
 from django.db import models
 
 
@@ -31,6 +30,7 @@ class User(models.Model):
 
 
 class Product(models.Model):
+    username = models.ForeignKey(User, on_delete=models.CASCADE)
     product_name = models.CharField(max_length=100)
     localization = models.CharField(
         max_length=10, choices=Location.choices, default=Location.ZERO_A
