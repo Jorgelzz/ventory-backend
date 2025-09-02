@@ -1,4 +1,5 @@
 from django.db import models
+from ventory_core import settings
 
 
 # Create your models here.
@@ -18,7 +19,7 @@ class Location(models.TextChoices):
 class MovementType(models.TextChoices):
     ENTRY = "entry", "Entry"
     EXIT = "exit", "Exit"
-
+    TRANSFER = "transfer", "Transfer"
 
 class User(models.Model):
     username = models.CharField(max_length=100)
@@ -54,3 +55,22 @@ class InventoryManagement(models.Model):
     def __str__(self):
         return f"{self.product} | {self.status}: {self.quantity}"
 
+class Transfer(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.PROTECT)
+    from_location = models.CharField(max_length=20)
+    to_location   = models.CharField(max_length=20)
+    quantity = models.PositiveIntegerField()
+    created_by = models.ForeignKey(User, on_delete=models.PROTECT)
+    mov_out = models.ForeignKey('InventoryManagement', on_delete=models.PROTECT, related_name='+')
+    mov_in  = models.ForeignKey('InventoryManagement', on_delete=models.PROTECT, related_name='+')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+class Stock_balance(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    localization = models.CharField(
+        max_length=10, choices=Location.choices, default=Location.ZERO_A
+    )
+    quantity = models.PositiveIntegerField(default=0)
+    class Meta:
+        unique_together = ('product', 'localization')
+    
