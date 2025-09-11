@@ -17,32 +17,31 @@ class InventoryManagementSerializer(serializers.ModelSerializer):
         return attrs
         
     @transaction.atomic
-    def create(self, validated):
-
-        prod = validated["product"]
-        qtd = validated["quantity"]
+    def create(self, validated_data): 
+        prod = validated_data["product"]
+        qtd = validated_data["quantity"]
 
         InventoryManagement.objects.create(
             product=prod,
             quantity=qtd,
             status=MovementType.EXIT,
-            username=validated["username"],
-            localization=validated["localization"]
+            username=validated_data["username"],
+            localization=validated_data["localization"]
         )
         InventoryManagement.objects.create(
             product=prod,
             quantity=qtd,
             status=MovementType.ENTRY,
-            username=validated["username"],
-            localization=validated["localization"]
+            username=validated_data["username"],
+            localization=validated_data["localization"]
         )
 
-        if validated["status"] == MovementType.ENTRY:
+        if validated_data["status"] == MovementType.ENTRY:
             Product.objects.filter(pk=prod.pk).update(quantity=F("quantity") + qtd)
         else:
             Product.objects.filter(pk=prod.pk).update(quantity=F("quantity") - qtd)
 
-        return super().create(validated)
+        return super().create(validated_data)
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -50,15 +49,15 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = "__all__"
 
-        def create(self, validated):
-            product = super().create(validated)
-            Stock_balance.objects.create(
-                product=product,
-                localization=validated["localization"],
-                quantity=validated["initial_quantity"]
-            )
-            Product.objects.filter(pk=product.pk).update(quantity=F("quantity") + validated["initial_quantity"])
-            return product
+    def create(self, validated): # type: ignore
+        product = super().create(validated)
+        Stock_balance.objects.create(
+            product=product,
+            localization=validated["localization"],
+            quantity=validated["initial_quantity"]
+        )
+        Product.objects.filter(pk=product.pk).update(quantity=F("quantity") + validated["initial_quantity"])
+        return product
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
