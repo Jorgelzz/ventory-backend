@@ -33,6 +33,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     "s93a8408040844892b2aef2f51e89f6cb.apps.svc.cluster.local",
     "127.0.0.1",
+    "myapp.shardweb.app"
 ]
 
 
