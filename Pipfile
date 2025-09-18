@@ -5,13 +5,13 @@ name = "pypi"
 
 [packages]
 django = "*"
-drf-spectacular = "*"
 django-cors-headers = "*"
 dj-database-url = "*"
 psycopg2-binary = "*"
 dotenv = "*"
 django-filter = "*"
 djangorestframework = "*"
+drf-spectacular = "*"
 
 [dev-packages]
 
